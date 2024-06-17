@@ -135,6 +135,9 @@ class Controller extends BaseController
         return Rank::query()
             ->orderby('rank', 'ASC')
             ->with('game')
+            ->whereHas('game', function ($q) {
+                $q->where('published', true);
+            })
             ->get()
             ->map(function (Rank $rank) {
                 // @phpstan-ignore-next-line
