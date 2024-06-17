@@ -349,7 +349,7 @@
               :title="trans.methods.__('bo_tooltip_image_input_modal_close_with_saving')"
               data-bs-tooltip="tooltip"
             >
-              {{ trans.methods.__("crud.actions.save").toUpperCase() }}
+              {{ trans.methods.__("crud.actions.save").charAt(0).toUpperCase() + trans.methods.__("crud.actions.save").slice(1) }}
             </button>
           </div>
         </div>
