@@ -6,6 +6,44 @@ All notable changes to `games-gallery` will be documented in this file.
 - This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html),
 - Commits respect [Conventionnal commits](https://www.conventionalcommits.org/en/v1.0.0/) & use [Gitmoji](https://gitmoji.dev/).
 
+## **[v5.0.0] - 26.06.24**
+
+### Added
+-   ci: 👷 update ci/cd (validations & deployment)
+-   feat: ✨ add unit tests via [alexis-gss/laravel-unit-tests](https://packagist.org/packages/alexis-gss/laravel-unit-tests)
+-   feat: ✨ add sitemap - issue #42
+-   feat: ✨ add user filter on activity log
+-   feat: ✨ add a showing page for CRUDs
+-   feat: ✨ replace old scrollbar by overlayscrollbars-vue package in front navigation
+-   feat: ✨ add scroll pagination on games list in front navigation
+-   feat: 🎨 upgrade getters to sort all models collection
+-   feat: 🚸 update front style (upgrade layout, colors affinity and margin/padding)
+-   feat: ♿️ update back cards style
+-   feat: ♿️ upgrade front navigation to improve accessibility
+-   feat: 🌐 use translations string in request validations
+
+### Changed
+-   chore: 📦 bump project to laravel 11
+-   refactor: ♻️ use default laravel helpers in blade file
+-   refactor: ♻️ use default blade directives in blade file
+-   refactor: ♻️ use cache laravel helper in blade filess
+-   refactor: ♻️ use helpers laravel trans in php files
+-   refactor: ♻️ rewrite all vue components into composition style
+-   refactor: ♻️ rewrite toast message functionnality when guest like a picture
+-   refactor: ♻️ replace model->id by the primary key
+
+### Fixed
+-   fix: 🚨 export sass safelist for purge css in vite.config.ts
+-   fix: 🐛 use universal unique identifier to rate a picture
+-   fix: 🐛 use cookie to save rating uuid locally
+-   fix: 🐛 restrict games ranks only for published games
+-   fix: ♿️ update messages when loading pictures
+
+### Removed
+-   chore: ➖ remove unused jscolor package
+
+Full changelog: https://github.com/alexis-gss/games-gallery/compare/v4.2.0...v5.0.0
+
 ## **[v4.2.0] - 08.03.24**
 
 ### Added
