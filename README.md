@@ -1,8 +1,10 @@
 <div align="center">
 
-![Banner of the github account](./resources/assets/images/github-visual.png)
+[![Banner of the github account](./resources/assets/images/github-visual.png)](https://games-gallery.alexis-gousseau.com/)
 
-![GitHub latest commit](https://img.shields.io/github/last-commit/alexis-gss/games-gallery/develop?color=212529&style=for-the-badge) ![GitHub tag](https://img.shields.io/github/tag/alexis-gss/games-gallery?style=for-the-badge&color=212529) ![GitHub open issues](https://img.shields.io/github/issues-raw/alexis-gss/games-gallery?style=for-the-badge&color=212529)
+[![Website test](https://img.shields.io/website-up-down-green-red/https/games-gallery.alexis-gousseau.com?style=for-the-badge)](https://games-gallery.alexis-gousseau.com)
+[![GitHub latest commit](https://img.shields.io/github/last-commit/alexis-gss/games-gallery/develop?color=5A718A&style=for-the-badge)](https://github.com/alexis-gss/games-gallery/commit/master)
+[![GitHub tag](https://img.shields.io/github/tag/alexis-gss/games-gallery?style=for-the-badge&color=5A718A)](https://github.com/alexis-gss/games-gallery/tags)
 
 </div>
 
@@ -25,7 +27,13 @@ Each element (name, image, folder, color, etc.) can be managed in the back-offic
 - [Copyright and License](#copyright-and-license)
 
 # Frameworks, Platforms and Libraries
-![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D) ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white) ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
+[![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)](https://sass-lang.com/)
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)](https://vuejs.org/)
+[![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
+[![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com/docs/master)
+[![Gitbook](https://img.shields.io/badge/GitBook-7B36ED?style=for-the-badge&logo=gitbook&logoColor=white)](https://www.gitbook.com/)
 
 # Documentation
 
@@ -49,7 +57,7 @@ When implementing a feature please create an issue first explaining your idea an
 
 # Changelog
 
-Latest version v4.2.0.
+Latest version v5.0.0.
 
 See the [CHANGELOG.md](CHANGELOG.md) file for details.
 

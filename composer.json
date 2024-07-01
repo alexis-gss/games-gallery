@@ -1,11 +1,20 @@
 {
     "name": "alexis-gss/games-gallery",
-    "version": "4.2.0",
+    "version": "5.0.0",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Gallery of pictures from a lot of games, realised under Laravel .",
+    "authors": [
+        {
+            "name": "Alexis Gousseau",
+            "homepage": "https://alexis-gousseau.com",
+            "role": "Developer"
+        }
+    ],
     "keywords": [
-        "framework",
-        "laravel"
+        "alexis-gss",
+        "laravel",
+        "games",
+        "images"
     ],
     "license": "MIT",
     "require": {
