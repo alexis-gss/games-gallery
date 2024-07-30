@@ -34,7 +34,7 @@ class Visit extends Model
     // * METHODS
 
     /**
-     * Update the specified resource.
+     * Set a visit and return a uuid.
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Game         $gameModel

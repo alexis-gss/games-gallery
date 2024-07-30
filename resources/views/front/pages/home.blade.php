@@ -4,7 +4,7 @@
 @section('description', $staticPageModel->seo_description ?? __('fo_home_description'))
 
 @section('content')
-    <main class="main-home d-flex justify-content-center align-items-center vh-100 mx-md-5 px-md-5 m-0 p-0 py-5">
+    <main class="main-home d-flex justify-content-center align-items-center mx-md-5 px-md-5 m-0 p-0 py-5">
         <div class="row w-100">
             <div class="col-12">
                 <h1 class="title-font-regular position-relative text-primary text-center w-fit px-sm-5 mx-auto mb-3 p-0 py-1">

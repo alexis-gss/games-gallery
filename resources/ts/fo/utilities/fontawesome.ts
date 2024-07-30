@@ -4,6 +4,8 @@ import {
     faArrowLeft,
     faArrowUp,
     faBars,
+    faChevronLeft,
+    faChevronRight,
     faCircleCheck,
     faCircleExclamation,
     faGlobe,
@@ -34,7 +36,9 @@ library.add(
     faCircleCheck,
     faCircleExclamation,
     faTriangleExclamation,
+    faChevronLeft,
+    faChevronRight,
     farEye,
-    farClock
+    farClock,
 );
 dom.watch();

@@ -5,8 +5,9 @@
 
 // * LIBS.
 @import './libs/bootstrap';
-@import 'aos/src/sass/aos';
-@import 'glightbox/dist/css/glightbox.css';
+@import '~/aos/src/sass/aos';
+@import '~/glightbox/dist/css/glightbox.css';
+@import '~/swiper/swiper.min.css';
 
 // * BASE.
 @import './base/common';

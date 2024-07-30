@@ -27,9 +27,7 @@
                     class="glightbox"
                     data-gallery="games-pictures"
                   >
-                    <div
-                      class="ratio ratio-16x9 overflow-hidden rounded-3"
-                    >
+                    <div class="ratio ratio-16x9 overflow-hidden rounded-3">
                       <img
                         :src="getPicturePath(getPictureNumber(paginateIndex, templateIndex) + pictureIndex)"
                         :alt="'Picture n°' + (getPictureNumber(paginateIndex, templateIndex) + pictureIndex + 1) + ' from the game ' + gameName"
@@ -38,9 +36,7 @@
                         @load="gameImageLazyLoad"
                       >
                       <div class="picture-loader position-absolute top-0 start-0 w-100 h-100">
-                        <div
-                          class="d-flex justify-content-center align-items-center w-100 h-100 bg-primary"
-                        >
+                        <div class="d-flex justify-content-center align-items-center w-100 h-100 bg-primary">
                           <div
                             class="spinner-border text-light"
                             role="status"
@@ -57,6 +53,8 @@
                     :class="['picture-ratings btn btn-white position-absolute bottom-0 end-0 m-1 z-2', {disabled: ratingLoading}]"
                     :disabled="ratingLoading"
                     @click="ajaxPictureRating(gamePictures[getPictureNumber(paginateIndex, templateIndex) + pictureIndex].id, getPictureNumber(paginateIndex, templateIndex) + pictureIndex)"
+                    :aria-label="trans.methods.__('Cliquez pour ajouter un like ou l\'enlever')"
+                    type="button"
                   >
                     <span
                       :id="`ratings-${gamePictures[getPictureNumber(paginateIndex, templateIndex) + pictureIndex].id}`"
@@ -80,16 +78,70 @@
           </div>
         </template>
       </template>
-      <div
-        v-if="!gameLoading && gameAllLoaded"
-        class="fst-italic text-secondary text-center mt-5 w-100"
-      >
-        {{ trans.methods.__("fo_images_loaded") }}
-      </div>
+      <template v-if="!gameLoading && gameAllLoaded">
+        <div class="fst-italic text-secondary text-center my-5 w-100">
+          {{ trans.methods.__("fo_images_loaded") }}
+        </div>
+        <div
+          v-if="relatedGamesViews.length"
+          class="row w-100 mx-auto pb-5"
+        >
+          <div class="col-12">
+            <h2 class="title-font-regular position-relative mx-auto mb-3 w-fit px-5 py-1 text-center">
+              {{ trans.methods.__('fo_slide_title') }}
+            </h2>
+          </div>
+          <div :class="['col-12 position-relative px-1 px-md-5', {'games-related-hidden': !swiperInitialized}]">
+            <button
+              class="swiper-button swiper-games-related-button-prev btn btn-primary position-absolute rounded-circle border-0 z-2"
+              :title="trans.methods.__('fo_slide_target', {'target': trans.methods.__('fo_prev')})"
+              :aria-label="trans.methods.__('fo_slide_target_aria', {'target': trans.methods.__('fo_prev')})"
+              type="button"
+            >
+              <i class="fa-solid fa-chevron-left" />
+            </button>
+            <div
+              id="swiper-games-related"
+              class="swiper swiper-games-related overflow-hidden px-3 pt-1 pb-4"
+            >
+              <div class="swiper-wrapper align-items-stretch w-fit">
+                <div
+                  v-for="(relatedGameView, relatedGameViewIndex) in relatedGamesViews"
+                  :key="relatedGameViewIndex"
+                  v-html="relatedGameView"
+                  class="swiper-slide"
+                />
+              </div>
+            </div>
+            <button
+              class="swiper-button swiper-games-related-button-next btn btn-primary position-absolute rounded-circle border-0 z-2"
+              :title="trans.methods.__('fo_slide_target', {'target': trans.methods.__('fo_next')})"
+              :aria-label="trans.methods.__('fo_slide_target_aria', {'target': trans.methods.__('fo_next')})"
+              type="button"
+            >
+              <i class="fa-solid fa-chevron-right" />
+            </button>
+            <div
+              v-if="relatedGamesViews.length > 1"
+              class="swiper-pagination swiper-games-related-pagination d-flex justify-content-center align-items-center w-100"
+            />
+          </div>
+          <div :class="['d-flex justify-content-center align-items-center w-100 h-100', {'d-none': swiperInitialized}]">
+            <div
+              class="spinner-border text-primary"
+              role="status"
+            >
+              <span class="visually-hidden">
+                {{ trans.methods.__("fo_text_loading") }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </template>
     </template>
     <div
       v-if="gameLoading"
-      class="text-center mt-5 w-100"
+      class="text-center my-5 w-100"
     >
       <div
         class="spinner-border text-primary"
@@ -100,7 +152,7 @@
     </div>
     <div
       v-if="!gameLoading && gamePictures.length <= 0"
-      class="text-center mt-5 w-100"
+      class="text-center my-5 w-100"
     >
       {{ trans.methods.__("fo_images_no_one") }}
     </div>
@@ -115,6 +167,8 @@ import { computed, defineOptions, onMounted, ref, useAttrs } from "vue";
 import errors from "./../../modules/errors";
 import route from "./../../modules/route";
 import trans from "./../../modules/trans";
+import Swiper from "swiper";
+import { Keyboard, Navigation, Pagination } from "swiper/modules";
 
 defineOptions({
   name: "GamePicturesComponent"
@@ -140,6 +194,8 @@ const gameViewer = ref<GLightbox|null>(null);
 const picturesTemplate = ref<Array<number>>([4,3,2,3]);
 const picturesRatings = ref<Array<number>>([]);
 const ratingLoading = ref<boolean>(false);
+const swiperInitialized = ref<boolean>(false);
+const relatedGamesViews = ref<Array<string>>([]);
 
 // * LIFECYCLE
 onMounted((): void => {
@@ -151,6 +207,7 @@ onMounted((): void => {
   gameLastPage.value = data.gamePictures.last_page;
   gameItems.value = data.gamePictures.per_page < 12 ? 12 : data.gamePictures.per_page;
   picturesRatings.value = data.ratingModels;
+  relatedGamesViews.value = data.relatedGamesViews;
   checkPicturesLoaded();
   checkScroll();
   getPictures();
@@ -175,7 +232,7 @@ const incrementNumber = computed<Array<number>>(() =>
   */
 function checkPicturesLoaded(): void {
   if (gamePage.value >= gameLastPage.value) {
-    gameAllLoaded.value = true;
+    initSwiper();
   }
 }
 
@@ -196,10 +253,26 @@ function checkScroll(): void {
         gameLoading.value = true;
         getPictures();
       } else {
-        gameAllLoaded.value = true;
+        if (!swiperInitialized.value) {
+          initSwiper();
+        }
       }
     }
   });
+}
+
+/**
+  * Check if all images are loaded on mounted component.
+  * @return void
+  */
+function initSwiper(): void {
+  if (!gameAllLoaded.value) {
+    setTimeout(() => {
+      setSwiper();
+      gamesRelatedImageLazyLoad();
+    }, 800);
+  }
+  gameAllLoaded.value = true;
 }
 
 /**
@@ -239,15 +312,40 @@ function getPictureNumber(paginateIndex: number, templateIndex: number): number 
 }
 
 /**
-  * Show image when she loaded,
-  * Hide the placeholder's image.
+  * Verify when an image of a game are loaded.
   * @param e Event
   * @return void
   */
 function gameImageLazyLoad(e: Event): void {
   const nodeTarget = e.target as HTMLImageElement;
-  nodeTarget.classList.remove("d-none");
-  const nodeTargetParent = nodeTarget.closest(".glightbox-wrapper");
+  displayImage(nodeTarget, ".glightbox-wrapper");
+}
+
+/**
+  * Verify when images of related games are loaded.
+  * @return void
+  */
+function gamesRelatedImageLazyLoad(): void {
+  const nodeTargets = document.querySelectorAll("#swiper-games-related .card .img-fluid") as NodeListOf<HTMLImageElement>;
+  nodeTargets.forEach(nodeTarget => {
+    if (nodeTarget.complete) {
+      displayImage(nodeTarget, ".card-img-top");
+      return;
+    }
+    nodeTarget.addEventListener("load", function () {
+      displayImage(nodeTarget, ".card-img-top");
+    });
+  });
+}
+
+/**
+  * Display a specific image,
+  * Then hide placeholder of the image.
+  * @return void
+  */
+function displayImage(image: HTMLImageElement, parentClass: string): void {
+  image.classList.remove("d-none");
+  const nodeTargetParent = image.closest(parentClass);
   nodeTargetParent?.querySelector(".picture-loader")?.classList.add("z-0");
   nodeTargetParent?.querySelector(".picture-loader")?.classList.remove("z-3");
   nodeTargetParent?.querySelector(".btn.picture-ratings")?.classList.remove("d-none");
@@ -341,20 +439,72 @@ function ajaxPictureRating(id: number, place: number): void {
     .then(() => { ratingLoading.value = false; })
     .catch(errors.methods.ajaxErrorHandler);
 }
+
+/**
+  * Create the slider for related games.
+  * @return void
+  */
+function setSwiper(): void {
+  new Swiper(".swiper-games-related", {
+    modules: [Navigation, Keyboard, Pagination],
+    grabCursor: true,
+    slidesPerView: 1.3,
+    initialSlide: 0,
+    centeredSlides: true,
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".swiper-games-related-button-next",
+      prevEl: ".swiper-games-related-button-prev",
+    },
+    keyboard: {
+      enabled: true,
+    },
+    pagination: {
+      el: ".swiper-games-related-pagination",
+      clickable: true,
+      renderBullet: function (index: number, className: string) {
+        return `<button class="btn btn-primary rounded-circle border-0 mx-2 p-0 ${className}" title="${trans.methods.__("fo_slide_id",{"slideId": String(index + 1)})}" aria-label="${trans.methods.__("fo_slide_id_aria",{"slideId": String(index + 1)})}" type="button"></button>`;
+      },
+    },
+    breakpoints: {
+      576: {
+        centeredSlides: true,
+        slidesPerView: 1.3,
+        spaceBetween: 25,
+      },
+      768: {
+        centeredSlides: true,
+        slidesPerView: 2,
+        spaceBetween: 35,
+      },
+      992: {
+        centeredSlides: true,
+        slidesPerView: 3,
+        spaceBetween: 35,
+      },
+    },
+  });
+  setTimeout(() => {
+    swiperInitialized.value = true;
+  }, 200);
+}
 </script>
 
 <style lang="scss" scopped>
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/placeholders";
 @import "./../../../sass/fo/utilities/variables";
 
-.glightbox {
-  z-index: 10;
+.glightbox img,
+.card img {
   transition: .3s;
-  img {
-    transition: .3s;
-  }
 }
 .glightbox-wrapper:hover img,
-.glightbox-wrapper:focus img {
+.glightbox-wrapper:focus img,
+.card:hover img,
+.card:focus img {
   transform: scale(1.05) !important;
 }
 .picture-ratings {
@@ -364,5 +514,46 @@ function ajaxPictureRating(id: number, place: number): void {
   border-radius: calc(var(--bs-border-radius-lg) - 0.08rem);
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
+}
+.swiper {
+  &-wrapper {
+    height: 100% !important;
+  }
+  &-button-disabled {
+    visibility: hidden;
+  }
+  &-slide {
+    height: auto;
+  }
+}
+.swiper-pagination {
+  &-bullet-active {
+    background-color: rgb(var(--bs-secondary-rgb)) !important;
+  }
+  button {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+.swiper-button{
+  height: fit-content !important;
+  &:first-of-type,
+  &:last-of-type {
+    bottom: -0.6rem;
+    @include media-breakpoint-up(md) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &:first-of-type {
+    left: calc(var(--bs-gutter-x) * .1);
+  }
+  &:last-of-type {
+    right: calc(var(--bs-gutter-x) * .1);
+  }
+}
+.games-related-hidden {
+  visibility: hidden;
+  height: 0;
 }
 </style>

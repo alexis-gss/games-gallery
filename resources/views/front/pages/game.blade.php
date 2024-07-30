@@ -6,7 +6,7 @@
 
 @section('content')
     <main class="main-page">
-        <div class="col-12 my-5">
+        <div class="col-12 py-5">
             <h1 class="title-font-regular position-relative mx-auto mb-3 w-fit px-5 py-1 text-center">
                 {{ $gameModel->name }}
                 <span class="d-none d-sm-block angles"></span>
@@ -37,7 +37,7 @@
                 @endif
             </div>
             <div class="d-flex flex-column flex-sm-row-reverse justify-content-center align-items-center w-100 mt-3 px-1">
-                <p class="text-primary mb-3 ms-sm-5 m-sm-0">
+                <p class="text-secondary mb-3 ms-sm-5 m-sm-0">
                     <i class="fa-regular fa-eye"></i>
                     {{ sprintf(
                         '%s %s',
@@ -45,7 +45,7 @@
                         count($gameModel->visits) > 1 ? str(__('models.visit'))->plural() : __('models.visit'),
                     ) }}
                 </p>
-                <p class="text-primary m-0">
+                <p class="text-secondary m-0">
                     <i class="fa-regular fa-clock"></i>
                     {{ $gameModel->published_at->lessThan(Carbon::now()->sub(1, 'day'))
                         ? sprintf('%s %s', str(__('validation.custom.published_at'))->ucFirst(), $gameModel->published_at->isoFormat('LL'))
@@ -60,6 +60,7 @@
                     'gameSlug' => $gameModel->slug,
                     'gamePictures' => $gamePictures,
                     'ratingModels' => $ratingModels,
+                    'relatedGamesViews' => $relatedGamesViews,
                 ];
             @endphp
             <div class="game-pictures" data-json='@json($dataGame)'></div>
