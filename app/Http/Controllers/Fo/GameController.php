@@ -24,8 +24,13 @@ class GameController extends Controller
         Request $request,
         string $slug
     ): \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse {
-
-        if ($gameModel = Game::query()->where('published', true)->where('slug', $slug)->first()) {
+        $gameModel = Game::query()
+            ->where('published', true)
+            ->where('slug', $slug)
+            ->whereHas('folder', function ($q) {
+                $q->where('published', true);
+            })->first();
+        if ($gameModel) {
             /** @var array $gamePictures */
             $gamePictures = [];
             if (count($gameModel->pictures)) {
@@ -56,12 +61,13 @@ class GameController extends Controller
             $cookie = (new Visit())->setVisit($request, $gameModel);
 
             return response(view('front.pages.game', [
-                'gameModel'    => $gameModel,
-                'gamePictures' => $gamePictures,
-                'ratingModels' => $ratingModels,
-                'gameModels'   => $this->getGamesPublished(true, $this->gamesPerPage),
-                'folderModels' => $this->getFoldersPublished(),
-                'tagModels'    => $this->getTagsPublished(),
+                'gameModel'         => $gameModel,
+                'gamePictures'      => $gamePictures,
+                'ratingModels'      => $ratingModels,
+                'gameModels'        => $this->getGamesPublished(true, $this->gamesPerPage),
+                'folderModels'      => $this->getFoldersPublished(),
+                'tagModels'         => $this->getTagsPublished(),
+                'relatedGamesViews' => $this->getRelatedGamesViews($gameModel),
             ]))->withCookie($cookie);
         } else {
             return redirect()->route('fo.games.index');
@@ -103,8 +109,34 @@ class GameController extends Controller
             })
             ->with('pictures')
             ->where('published', true)
+            ->whereHas('folder', function ($q) {
+                $q->where('published', true);
+            })
             ->orderBy('slug', 'ASC')
-            ->paginate($this->modelsPerPage);
+            ->paginate($this->gamesPerPage);
         return response()->json($gamesFiltered);
+    }
+
+    /**
+     * Return a list of games filtered.
+     *
+     * @param \App\Models\Game $gameModel
+     * @return array
+     */
+    public function getRelatedGamesViews(Game $gameModel): array
+    {
+        /** @var array<int, string> $relatedGamesViews */
+        $relatedGamesViews = [];
+        Game::query()->with('pictures', 'folder')
+            ->where([['published', true], ['id', '!=', $gameModel->getKey()]])
+            ->whereHas('folder', function ($q) use ($gameModel) {
+                $q->where([['published', true], ['id', $gameModel->folder->getKey()]]);
+            })->orderby('published_at', 'DESC')->take(6)->get()
+            ->map(function (Game $randomGameModel) use (&$relatedGamesViews) {
+                array_push($relatedGamesViews, [
+                    view('front.partials.card-game', ['gameModel' => $randomGameModel])->render()
+                ]);
+            });
+        return $relatedGamesViews;
     }
 }

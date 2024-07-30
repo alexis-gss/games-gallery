@@ -10,7 +10,7 @@
         @include('front.layouts.loading-screen')
     @endif
 
-    <div class="container py-5">
+    <div class="container overflow-hidden">
         @include('front.partials.btn-github')
 
         @if (request()->routeIs('fo.games.show') || request()->routeIs('fo.ranks.index'))

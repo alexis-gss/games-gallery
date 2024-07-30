@@ -26,8 +26,10 @@ class UpdateUserRequest extends StoreUserRequest
     {
         /** @var \App\Models\User $userModel */
         $userModel = request()->route()->parameter('user');
+        /** @var \App\Models\User $authUserModel */
+        $authUserModel = auth('backend')->user();
         $this->merge([
-            'published' => auth('backend')->user()->getKey() !== $userModel->getKey() ?
+            'published' => $authUserModel->getKey() !== $userModel->getKey() ?
                 $this->boolean('published') :
                 true
         ]);

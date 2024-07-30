@@ -2,8 +2,9 @@ body {
     min-height: 100vh;
 
     .main {
+        &-home,
         &-page {
-            min-height: calc(100vh - 6rem);
+            min-height: 100vh;
         }
 
         &-home-latest {
