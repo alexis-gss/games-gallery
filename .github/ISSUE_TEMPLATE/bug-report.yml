@@ -1,6 +1,6 @@
 name: 🐛 Bug Report
 description: File a bug report.
-title: "[SIDE] - Title"
+title: "Title"
 labels: ["type: bug", "status: todo"]
 assignees:
   - alexis-gss
