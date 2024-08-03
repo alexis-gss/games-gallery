@@ -18,4 +18,4 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl jq sshpass openssh-client
       - name: Pull over SSH
-        run: sshpass -p ${{ secrets.OVH_SSH_PASSWORD }} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${{ secrets.OVH_SSH_USERNAME }}@${{ secrets.OVH_SSH_HOST }} -p ${{ secrets.OVH_SSH_PORT }} -- 'cd ${{ secrets.OVH_WEBSITE_DOCUMENTROOT }} && git pull origin master'
+        run: sshpass -p ${{ secrets.OVH_SSH_PASSWORD }} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${{ secrets.OVH_SSH_USERNAME }}@${{ secrets.OVH_SSH_HOST }} -p ${{ secrets.OVH_SSH_PORT }} -- 'cd ${{ secrets.OVH_WEBSITE_DOCUMENTROOT }} && git reset --hard origin/master'
