@@ -59,19 +59,27 @@ body {
     }
 }
 
-.btn-scroll {
-    z-index: $zindex-fixed;
-    overflow: hidden;
-    width: 50.7px;
-    height: 58px;
-    transition: 0.3s;
+.btn {
+    &-scroll {
+        z-index: $zindex-fixed;
+        overflow: hidden;
+        width: 50.7px;
+        height: 58px;
+        transition: 0.3s;
 
-    &-hidden {
-        width: 0;
-        padding: 0 !important;
-        border: 0 !important;
-        opacity: 0;
-        visibility: hidden;
+        &-hidden {
+            width: 0;
+            padding: 0 !important;
+            border: 0 !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    &-share {
+        @include media-breakpoint-up(md) {
+            position: absolute;
+        }
     }
 }
 

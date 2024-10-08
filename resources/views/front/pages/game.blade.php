@@ -6,11 +6,15 @@
 
 @section('content')
     <main class="main-page">
-        <div class="col-12 py-5">
+        {{-- TITLE --}}
+        <div class="col-12 pt-5">
             <h1 class="title-font-regular position-relative mx-auto mb-3 w-fit px-5 py-1 text-center">
                 {{ $gameModel->name }}
                 <span class="d-none d-sm-block angles"></span>
             </h1>
+        </div>
+        {{-- TAGS --}}
+        <div class="col-12">
             <div
                 class="d-flex justify-content-center align-items-center user-select-none w-100 flex-row flex-wrap text-center">
                 <div class="rounded-2 shadow">
@@ -36,8 +40,11 @@
                     @endforeach
                 @endif
             </div>
-            <div class="d-flex flex-column flex-sm-row-reverse justify-content-center align-items-center w-100 mt-3 px-1">
-                <p class="text-secondary mb-3 ms-sm-5 m-sm-0">
+        </div>
+        {{-- VISITS/PUBLISHED_AT --}}
+        <div class="col-12 my-3">
+            <div class="d-flex flex-colum flex-sm-row-reverse justify-content-center align-content-center mb-3 mb-md-0">
+                <p class="text-secondary ms-sm-5 m-sm-0 mb-0">
                     <i class="fa-regular fa-eye"></i>
                     {{ sprintf(
                         '%s %s',
@@ -53,6 +60,20 @@
                 </p>
             </div>
         </div>
+        {{-- FILTERS/SHARE --}}
+        <div class="col-12 px-1 mb-1">
+            <div class="d-flex flex-colum flex-sm-row justify-content-between align-content-center">
+                <select name="" id="" class="form-select form-select-sm bg-primary text-bg-primary border-0 w-fit" role="button">
+                    <option>Ordre de publication</option>
+                    <option>Plus likés</option>
+                </select>
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#socialMediasModel">
+                    <i class="fa-solid fa-share-nodes me-1"></i>
+                    {{ str(__('fo_share'))->ucFirst() }}
+                </button>
+            </div>
+        </div>
+        {{-- IMAGES --}}
         <div class="col-12">
             @php
                 $dataGame = [

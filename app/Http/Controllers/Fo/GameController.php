@@ -93,15 +93,13 @@ class GameController extends Controller
         /** @var \Illuminate\Support\Collection $gamesFiltered */
         $gamesFiltered = Game::query()
             ->when(
-                isset($searchSelects[1]) &&
-                    !empty($searchSelects[1]),
+                isset($searchSelects[1]) && !empty($searchSelects[1]),
                 function (Builder $query) use ($searchSelects) {
                     $query->where('folder_id', $searchSelects[1]);
                 }
             )
             ->when(
-                isset($searchSelects[0]) &&
-                    !empty($searchSelects[0]),
+                isset($searchSelects[0]) && !empty($searchSelects[0]),
                 function (Builder $query) use ($searchSelects) {
                     $query->whereHas('tags', function (Builder $query) use ($searchSelects) {
                         $query->where('id', $searchSelects[0]);
@@ -135,7 +133,10 @@ class GameController extends Controller
             ->where([['published', true], ['id', '!=', $gameModel->getKey()]])
             ->whereHas('folder', function ($q) use ($gameModel) {
                 $q->where([['published', true], ['id', $gameModel->folder->getKey()]]);
-            })->orderby('published_at', 'DESC')->take(5)->get()
+            })
+            ->orderby('published_at', 'DESC')
+            ->take(5)
+            ->get()
             ->map(function (Game $randomGameModel) use (&$relatedGamesViews) {
                 array_push($relatedGamesViews, [
                     view('front.partials.card-game', ['gameModel' => $randomGameModel])->render()

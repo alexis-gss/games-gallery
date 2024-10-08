@@ -15,6 +15,8 @@
 
         @include('front.partials.btn-github')
 
+        @include('front.partials.social-medias')
+
         @if ((request()->routeIs('fo.games.show') && isset($gameModel)) || request()->routeIs('fo.ranks.index'))
             @include('front.layouts.nav')
         @endif

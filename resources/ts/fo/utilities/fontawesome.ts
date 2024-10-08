@@ -1,5 +1,12 @@
 import { config, dom, library } from "@fortawesome/fontawesome-svg-core";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+    faFacebook,
+    faGithub,
+    faLinkedin,
+    faTelegram,
+    faTwitter,
+    faWhatsapp
+} from "@fortawesome/free-brands-svg-icons";
 import {
     faArrowLeft,
     faArrowUp,
@@ -10,6 +17,7 @@ import {
     faCircleExclamation,
     faGlobe,
     faRankingStar,
+    faShareNodes,
     faThumbsUp,
     faTriangleExclamation,
     faXmark,
@@ -29,6 +37,11 @@ library.add(
     faBars,
     faArrowLeft,
     faGithub,
+    faFacebook,
+    faTwitter,
+    faLinkedin,
+    faTelegram,
+    faWhatsapp,
     faRankingStar,
     faGlobe,
     faThumbsUp,
@@ -40,5 +53,6 @@ library.add(
     faChevronRight,
     farEye,
     farClock,
+    faShareNodes
 );
 dom.watch();

@@ -468,19 +468,15 @@ function setSwiper(): void {
     },
     breakpoints: {
       576: {
-        centeredSlides: true,
         slidesPerView: 1.3,
         spaceBetween: 25,
       },
       768: {
-        centeredSlides: true,
         slidesPerView: 2,
         spaceBetween: 35,
       },
       992: {
-        centeredSlides: true,
         slidesPerView: 3,
-        spaceBetween: 35,
       },
     },
   });
