@@ -1,4 +1,4 @@
-<footer class="bg-body-tertiary px-0 text-center border-top" id="footer">
+<footer class="text-center px-0" id="footer">
     <div class="p-2 text-center">
         @if (isset($globalLicense))
             <span>{{ $globalLicense }}</span>

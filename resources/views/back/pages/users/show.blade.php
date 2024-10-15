@@ -101,12 +101,8 @@
                                                 <i class="fa-solid fa-eye"></i>
                                             </button>
                                         </div>
-                                        @include('back.partials.modal-view-picture', [
-                                            'id' => 'ModalViewPicture',
-                                            'pictureSrc' => asset($userModel->picture),
-                                            'pictureAlt' => $userModel->picture_alt,
-                                            'pictureTitle' => $userModel->picture_title,
-                                        ])
+                                        <x-back.modal-view-picture id="ModalViewPicture" :pictureAlt="$userModel->picture_alt"
+                                            :pictureTitle="$userModel->picture_title" :pictureSrc="asset($userModel->picture)" />
                                     </div>
                                 </td>
                             </tr>

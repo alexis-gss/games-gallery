@@ -1,40 +1,81 @@
-body {
-    > nav {
-        .navbar {
-            &-toggler.collapsed .navbar-toggler-icon-close {
-                display: none;
-            }
 
-            &-toggler:not(.collapsed) .navbar-toggler-icon {
-                display: inline;
-            }
+body {
+    &:has(.navigation.show) {
+        overflow: hidden;
+    }
+
+    > #header {
+        overflow: auto;
+        height: $bo-header-height;
+        min-height: $bo-header-height;
+        max-height: 100vh;
+
+        @include media-breakpoint-up(lg) {
+            overflow: visible;
+            height: $bo-header-height;
+        }
+
+        .profile-picture {
+            width: 2rem;
+            height: 2rem;
         }
     }
 
     > main {
-        min-height: calc(100vh - #{$bo-header-height} - #{$bo-footer-height});
-        margin-top: $bo-header-height !important;
+        min-height: calc(100vh - #{$bo-header-height});
+        margin-top: $bo-header-height;
+
+        #navigation {
+            position: sticky;
+            z-index: 2;
+            top: $bo-header-height;
+            left: 0;
+            overflow-y: auto;
+            transition: .3s;
+
+            @include media-breakpoint-up(lg) {
+                z-index: 1;
+                width: 15rem;
+                height: calc(100vh - #{$bo-header-height});
+
+                ~ #page-content {
+                    width: calc(100% - 16rem);
+                    transition: .3s;
+                }
+            }
+
+
+            .side-menu {
+                height: calc(100vh - #{$bo-header-height});
+
+                @include media-breakpoint-up(lg) {
+                    height: fit-content;
+                }
+
+                ul {
+                    list-style: none;
+                }
+
+                svg {
+                    width: 1rem;
+                    height: 1rem;
+                }
+            }
+        }
+
+        .navigation-sm {
+            width: 4.1rem !important;
+
+            ~ #page-content {
+                width: calc(100% - 5.1rem) !important;
+            }
+        }
     }
 
     > footer {
-        min-height: #{$bo-footer-height};
-        box-shadow: 0 -0.125rem 0.25rem rgb(0 0 0 / 7.5%) !important;
-    }
-}
-
-#navbar {
-    overflow: auto;
-    min-height: $bo-header-height;
-    max-height: 100vh;
-
-    @include media-breakpoint-up(xl) {
-        overflow: visible;
-        height: $bo-header-height;
-    }
-
-    .profile-picture {
-        width: 2rem;
-        height: 2rem;
+        @include media-breakpoint-up(md) {
+            z-index: 2 !important;
+        }
     }
 }
 

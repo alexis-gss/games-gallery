@@ -1,7 +1,7 @@
 {{-- GET ACTUAL PAGINATION --}}
 @php $pagination = intval(cache()->get('pagination.' . str(request()->route()->getName())->slug())); @endphp
 @if ($paginator->items())
-    <nav class="pagination-custom d-flex justify-content-between align-items-center">
+    <section class="pagination-custom d-flex justify-content-between align-items-center">
         {{-- SELECT ITEMS PER PAGE --}}
         <div class="dropup-center dropup d-flex justify-content-center align-items-center input-group w-fit">
             <span class="btn-md input-group-text" data-bs-tooltip="tooltip" data-bs-placement="top"

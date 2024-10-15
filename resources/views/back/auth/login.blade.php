@@ -8,7 +8,7 @@
         {{ config('app.name') }}
         <span class="d-none d-sm-block angles"></span>
     </h1>
-    <div class="card-auth row w-100 justify-content-center pb-5">
+    <div class="card-auth row justify-content-center mx-auto pb-4 w-100">
         <div class="col-12 p-0">
             <!-- Show a message when an action is performed -->
             @include('back.modules.flash-messages')

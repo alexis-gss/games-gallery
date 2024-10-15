@@ -21,12 +21,11 @@ class TagPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \App\Models\User $authUser
      * @return boolean
      */
-    public function view(User $authUser): bool
+    public function view(): bool
     {
-        return UserStaticRules::atLeastRole($authUser, RoleEnum::admin);
+        return UserStaticRules::everyOne();
     }
 
     /**

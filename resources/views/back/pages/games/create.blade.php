@@ -29,7 +29,7 @@
         @endcan
         @include('back.pages.games.form-inputs')
         @can('create', $gameModel)
-            @include('back.partials.script-button-clone')
+            <x-back.script-button-clone />
             <div class="row mt-3">
                 <div class="col text-center">
                     <button class="btn btn-primary" id="formSubmit" data-bs-tooltip="tooltip" data-bs-placement="top" type="submit"

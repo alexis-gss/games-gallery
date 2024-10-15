@@ -2,9 +2,7 @@ import type { SweetAlertResult } from "sweetalert2";
 import sweetalert from "../../modules/sweetalert";
 
 window.addEventListener("DOMContentLoaded", () => {
-    /**
-     * Popup action item.
-     */
+    /** Popup action item. */
     const elementsAction = document.getElementsByClassName(
         "confirmActionTS"
     ) as HTMLCollectionOf<Element>;
@@ -33,4 +31,23 @@ window.addEventListener("DOMContentLoaded", () => {
             return false;
         });
     }
+    /** Transform navigation */
+    const navigation = document.getElementById("navigation");
+    const navigationLabels = document.querySelectorAll(".navigation-label");
+    const btnSideMenuToggle = document.getElementById("side-menu-toggle") as HTMLButtonElement|null;
+    btnSideMenuToggle?.addEventListener("click", function () {
+        btnSideMenuToggle.disabled = true;
+        navigation?.classList.toggle("navigation-sm");
+        navigationLabels.forEach(navigationLabel => {
+            if (!navigation?.classList.contains("navigation-sm")) {
+                setTimeout(() => {
+                    navigationLabel?.classList.toggle("d-none");
+                    btnSideMenuToggle.disabled = false;
+                }, 300);
+            } else {
+                navigationLabel?.classList.toggle("d-none");
+                btnSideMenuToggle.disabled = false;
+            }
+        });
+    });
 });

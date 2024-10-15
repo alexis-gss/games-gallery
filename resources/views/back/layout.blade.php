@@ -7,31 +7,30 @@
 
 {{-- blade-formatter-disable --}}
 @use('\App\Enums\Theme\BootstrapThemeEnum', 'BootstrapThemeEnum')
-<body data-bs-theme="{{ (BootstrapThemeEnum::make(intval(cache()->get('theme'))) ?? BootstrapThemeEnum::light)->name() }}">
-    <!-- Header -->
-    @include('back.layouts.nav')
+<body class="bg-body-tertiary" data-bs-theme="{{ (BootstrapThemeEnum::make(intval(cache()->get('theme'))) ?? BootstrapThemeEnum::light)->name() }}">
+    {{-- HEADER --}}
+    @include('back.layouts.header')
 
-    <!-- Main content -->
-    <main class="container-fluid row mx-auto">
-        <div class="col-12 col-md-10 col-lg-8 mx-auto px-0 py-3">
-            @include('back.partials.noscript-warning')
-            @if (!auth('backend')->user())
-                <div class="d-flex flex-column align-items-center justify-content-center h-100 pb-5">
-            @else
-                {{-- Show a message when an action is performed --}}
-                @include('back.modules.flash-messages')
-            @endif
-            @yield('content')
-            @if (!auth('backend')->user())
+    {{-- MAIN CONTENT --}}
+    <main class="@auth('backend') container-fluid @else container d-flex flex-column align-items-center justify-content-center @endauth">
+        <div class="row">
+            @include('back.layouts.navigation')
+            <section id="page-content" class="col-12 bg-body rounded-3 border p-3 py-2 py-md-3">
+                <div class="container">
+                    <x-back.noscript-warning/>
+                    @auth('backend')
+                        @include('back.modules.flash-messages')
+                    @endauth
+                    @yield('content')
                 </div>
-            @endif
+            </section>
         </div>
     </main>
 
-    <!-- Footer -->
+    {{-- FOOTER --}}
     @include('back.layouts.footer')
 
-    <!-- Other -->
+    {{-- OTHER --}}
     @include('back.modules.window-system')
     @vite(['resources/ts/bo/back.ts'])
     @stack('scripts')

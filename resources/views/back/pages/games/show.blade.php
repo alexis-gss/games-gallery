@@ -105,16 +105,14 @@
                                                         <i class="fa-solid fa-eye"></i>
                                                     </button>
                                                 </div>
-                                                @include('back.partials.modal-view-picture', [
-                                                    'id' => "ModalViewPicture$key",
-                                                    'pictureSrc' => sprintf(
+                                                <x-back.modal-view-picture id="ModalViewPicture{{ $key }}" :pictureAlt="$picture->label"
+                                                    :pictureTitle="str(__('models.picture'))->ucFirst()"
+                                                    :pictureSrc="sprintf(
                                                         '%s/storage/pictures/%s/%s.webp',
                                                         config('app.url'),
                                                         $gameModel->slug,
-                                                        $picture->uuid),
-                                                    'pictureAlt' => $picture->label,
-                                                    'pictureTitle' => str(__('models.picture'))->ucFirst(),
-                                                ])
+                                                        $picture->uuid,
+                                                    )" />
                                             @endforeach
                                         @else
                                             {{ __('bo_other_number_images', ['number' => 0]) }}

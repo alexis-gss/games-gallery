@@ -35,7 +35,7 @@
                 @endif
             @endforeach
             <!-- COUNTERS -->
-            <div class="col-12 mb-3">
+            <div class="col-12">
                 <div class="card bg-body-tertiary border-top rounded-3 p-md-5 p-3">
                     <div class="row">
                         @php

@@ -49,7 +49,7 @@
         @endcan
         @include('back.pages.static_pages.form-inputs')
         @can('update', $staticPageModel)
-            @include('back.partials.script-button-clone')
+            <x-back.script-button-clone />
             <div class="row mt-3">
                 <div class="col text-center">
                     <button class="btn btn-primary" id="formSubmit" data-bs-tooltip="tooltip" data-bs-placement="top" type="submit"
