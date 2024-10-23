@@ -1,4 +1,5 @@
 @extends('back.layout')
+
 @section('title', __('Authentification'))
 @section('description', __('Formulaire d\'authentification au back-office.'))
 

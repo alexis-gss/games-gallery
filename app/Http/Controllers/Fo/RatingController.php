@@ -60,7 +60,7 @@ class RatingController extends Controller
             $toastId = Str::uuid()->toString();
 
             return response()->json([
-                'view' => view('front.partials.toast-template', [
+                'view' => view('components.front.toast-template', [
                     'gameName'     => Picture::query()
                         ->where('id', $validator->validated()['picture_id'])
                         ->first()->game->name,

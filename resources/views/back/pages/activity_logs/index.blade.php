@@ -8,21 +8,17 @@
     <div class="d-flex justify-content-between flex-md-nowrap align-items-center flex-wrap pb-3">
         @include('breadcrumbs.breadcrumb-body', ['brParam' => $userModel])
     </div>
-    @include('back.modules.search-bar')
+    <x-back.search-bar :search="$search" :searchFields="$searchFields" />
     <div class="bg-body-tertiary border rounded-3 p-3 mb-3">
         <div class="table-responsive">
             <table class="table-hover table-fix-action m-0 table">
                 @if (count($activitylogModels) > 0)
-                    <thead>
-                        @include('back.modules.table-col-sorter', [
-                            'cols' => [
-                                'event' => str(__('validation.custom.event'))->ucfirst(),
-                                'user' => str(__('models.user'))->ucfirst(),
-                                'model' => str(__('validation.custom.model'))->ucfirst(),
-                                'created_at' => str(__('validation.attributes.created_at'))->ucfirst(),
-                            ],
-                        ])
-                    </thead>
+                    <x-back.table-col-sorter :cols="[
+                        'event' => str(__('validation.custom.event'))->ucfirst(),
+                        'user' => str(__('models.user'))->ucfirst(),
+                        'model' => str(__('validation.custom.model'))->ucfirst(),
+                        'created_at' => str(__('validation.attributes.created_at'))->ucfirst(),
+                    ]" />
                     <tbody>
                         @foreach ($activitylogModels as $activitylogModel)
                             <tr @class([

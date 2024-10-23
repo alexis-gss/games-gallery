@@ -36,7 +36,7 @@
                             'max' => 255,
                         ]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'name'])
+                    <x-back.input-error inputName="name"/>
                 </div>
             </div>
         </fieldset>
@@ -61,7 +61,7 @@
                             {{ __('validation.boolean', ['attribute' => __('validation.custom.publishment')]) }}
                         </small>
                     </div>
-                    @include('back.modules.input-error', ['inputName' => 'published'])
+                    <x-back.input-error inputName="published"/>
                 </div>
             </div>
         </fieldset>

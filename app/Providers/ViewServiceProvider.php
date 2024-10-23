@@ -56,7 +56,7 @@ class ViewServiceProvider extends ServiceProvider
 
             // * FORCE BOOTSTRAP PAGINATOR (or custom if in front)
             (collect(explode('/', \request()->getPathInfo()))->get(1) === 'bo')
-                ? Paginator::defaultView('back.modules.pagination')
+                ? Paginator::defaultView('components.back.pagination')
                 : Paginator::useBootstrapFive();
         } //end if
     }

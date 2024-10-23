@@ -17,6 +17,6 @@
             </button>
         </form>
     @else
-        @include('back.modules.user-right')
+        <x-back.user-right />
     @endcan
 </td>

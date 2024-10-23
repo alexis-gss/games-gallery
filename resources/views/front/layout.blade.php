@@ -2,39 +2,35 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @include('front.layouts.head')
+    <x-front.layouts.head />
 </head>
 
 <body>
-    @if (request()->routeIs('fo.games.index'))
-        @include('front.layouts.loading-screen')
-    @endif
+    <x-front.layouts.loading-screen />
 
-    <div class="container overflow-hidden">
-        @include('front.partials.noscript-warning')
+    <main class="container overflow-hidden">
+        <x-front.noscript-warning />
+        <x-front.btn-github />
 
-        @include('front.partials.btn-github')
-
-        @if ((request()->routeIs('fo.games.show') && isset($gameModel)) || request()->routeIs('fo.ranks.index'))
-            @include('front.layouts.nav')
+        {{-- NAVIGATION --}}
+        @if (!request()->routeIs('fo.games.index') && isset($gameModel))
+            <x-front.layouts.nav />
         @endif
 
-        <div data-aos="fade">
-            <!-- Main content -->
-            @yield('content')
-        </div>
-    </div>
+        {{-- MAIN CONTENT --}}
+        @yield('content')
+    </main>
 
-    <!-- Footer -->
-    @include('front.layouts.footer')
+    {{-- FOOTER --}}
+    <x-front.layouts.footer />
 
-    <!-- Toast messages container -->
+    {{-- TOAST MESSAGES CONTAINER --}}
     @if (request()->routeIs('fo.games.show'))
         <div class="toast-container position-fixed top-0 p-3"></div>
     @endif
 
-    <!-- Other -->
-    @include('front.modules.window-system')
+    {{-- OTHER --}}
+    <x-front.window-system />
     @vite(['resources/ts/fo/front.ts'])
     @stack('scripts')
 </body>

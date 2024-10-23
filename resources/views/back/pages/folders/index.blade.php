@@ -14,22 +14,18 @@
             </a>
         @endcan
     </div>
-    @include('back.modules.search-bar')
+    <x-back.search-bar :search="$search" :searchFields="$searchFields" />
     <div class="bg-body-tertiary border rounded-3 p-3 mb-3">
         <div class="table-responsive">
             <table class="table-hover table-fix-action m-0 table">
                 @if (count($folderModels) > 0)
-                    <thead>
-                        @include('back.modules.table-col-sorter', [
-                            'cols' => [
-                                'name' => str(__('validation.attributes.name'))->ucfirst(),
-                                'color' => str(__('validation.custom.color'))->ucfirst(),
-                                'published' => str(__('validation.custom.publishment'))->ucfirst(),
-                                'updated_at' => str(__('validation.attributes.updated_at'))->ucfirst(),
-                                'order' => str(__('validation.custom.order'))->ucfirst(),
-                            ],
-                        ])
-                    </thead>
+                    <x-back.table-col-sorter :cols="[
+                        'name' => str(__('validation.attributes.name'))->ucfirst(),
+                        'color' => str(__('validation.custom.color'))->ucfirst(),
+                        'published' => str(__('validation.custom.publishment'))->ucfirst(),
+                        'updated_at' => str(__('validation.attributes.updated_at'))->ucfirst(),
+                        'order' => str(__('validation.custom.order'))->ucfirst(),
+                    ]" />
                     <tbody>
                         @foreach ($folderModels as $folderModel)
                             <tr @class([
@@ -62,10 +58,7 @@
                                         </span>
                                     </div>
                                 </td>
-                                @include('back.modules.change-published-status', [
-                                    'routeName' => 'folders',
-                                    'model' => $folderModel,
-                                ])
+                                <x-back.change-published-status routeName="folders" :model="$folderModel" :loop="$loop" />
                                 <td @class(['text-center align-middle', 'border-0' => $loop->last])>
                                     <span class="badge rounded-pill text-bg-secondary">
                                         {{ $folderModel->updated_at->isoFormat('LLLL') }}
@@ -73,11 +66,7 @@
                                 </td>
                                 @php $routeName = request()->route()->getName(); @endphp
                                 @if (empty(request()->search) && session()->get("$routeName.sort_col") === 'order')
-                                    @include('back.modules.change-model-order', [
-                                        'routeName' => 'folders',
-                                        'models' => $folderModels,
-                                        'model' => $folderModel,
-                                    ])
+                                    <x-back.change-model-order routeName="folders" :models="$folderModels" :model="$folderModel" :loop="$loop" />
                                 @endif
                                 <td @class(['text-end align-middle', 'border-0' => $loop->last])>
                                     @canAny(['view', 'duplicate', 'update', 'delete'], $folderModel)
@@ -117,7 +106,7 @@
                                             @endcan
                                         </form>
                                     @else
-                                        @include('back.modules.user-right')
+                                        <x-back.user-right />
                                     @endcan
                                 </td>
                             </tr>

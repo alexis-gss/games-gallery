@@ -5,7 +5,7 @@
 @section('breadcrumb', request()->route()->getName())
 
 @section('content')
-    <main class="main-page">
+    <section class="main-page" data-aos="fade">
         <div class="col-12 py-5">
             <h1 class="title-font-regular position-relative mx-auto mb-3 w-fit px-5 py-1 text-center">
                 {{ $gameModel->name }}
@@ -65,7 +65,7 @@
             @endphp
             <div class="game-pictures" data-json='@json($dataGame)'></div>
         </div>
-    </main>
+    </section>
 @endsection
 
 @push('scripts')

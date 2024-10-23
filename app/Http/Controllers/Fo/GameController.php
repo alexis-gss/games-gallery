@@ -138,7 +138,7 @@ class GameController extends Controller
             })->orderby('published_at', 'DESC')->take(5)->get()
             ->map(function (Game $randomGameModel) use (&$relatedGamesViews) {
                 array_push($relatedGamesViews, [
-                    view('front.partials.card-game', ['gameModel' => $randomGameModel])->render()
+                    view('components.front.card-game', ['gameModel' => $randomGameModel])->render()
                 ]);
             });
         return $relatedGamesViews;

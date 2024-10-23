@@ -25,7 +25,7 @@
                             'max' => 255,
                         ]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'first_name'])
+                    <x-back.input-error inputName="first_name"/>
                 </div>
                 <div class="col-12 col-md-6 form-group mb-3">
                     <label class="col-form-label" for="last_name">
@@ -46,7 +46,7 @@
                             'max' => 255,
                         ]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'last_name'])
+                    <x-back.input-error inputName="last_name"/>
                 </div>
                 <div class="col-12 col-md-6 form-group mb-3">
                     <label class="col-form-label" for="email">
@@ -62,7 +62,7 @@
                     <small class="text-body-secondary">
                         {{ __('validation.email', ['attribute' => __('validation.attributes.email')]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'email'])
+                    <x-back.input-error inputName="email"/>
                 </div>
                 <div class="col-12 col-md-6 form-group mb-3">
                     <label class="col-form-label" for="role">
@@ -82,7 +82,7 @@
                     <small class="text-body-secondary">
                         {{ __('validation.rule.select-single', ['entity' => __('validation.attributes.role')]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'role'])
+                    <x-back.input-error inputName="role"/>
                 </div>
             </div>
         </fieldset>
@@ -115,7 +115,7 @@
                         ];
                     @endphp
                     <div class="image-input" data-json='@json($data)'></div>
-                    @include('back.modules.input-error', ['inputName' => 'picture'])
+                    <x-back.input-error inputName="picture"/>
                 </div>
             </div>
         </fieldset>
@@ -151,7 +151,7 @@
                             'min' => 8,
                         ]) }}&nbsp;{{ __('validation.rule.password_empty') }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'password'])
+                    <x-back.input-error inputName="password"/>
                 </div>
                 <div class="col-12 col-md-6 form-group mb-3">
                     <label class="col-form-label" for="password_confirmation">
@@ -178,7 +178,7 @@
                             'min' => 8,
                         ]) }}&nbsp;{{ __('validation.rule.confirmation_label') }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'passwordConfirm'])
+                    <x-back.input-error inputName="passwordConfirm"/>
                 </div>
             </div>
         </fieldset>
@@ -205,7 +205,7 @@
                                 {{ __('validation.boolean', ['attribute' => __('validation.custom.publishment')]) }}
                             </small>
                         </div>
-                        @include('back.modules.input-error', ['inputName' => 'published'])
+                        <x-back.input-error inputName="published"/>
                     </div>
                 </div>
             </fieldset>

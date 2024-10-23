@@ -25,7 +25,7 @@
                             'max' => 255,
                         ]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'name'])
+                    <x-back.input-error inputName="name"/>
                 </div>
                 <div class="col-12 col-md-6 form-group">
                     <label class="col-form-label" for="folder_id">
@@ -61,7 +61,7 @@
                     <small class="text-body-secondary">
                         {{ __('validation.rule.select-single', ['entity' => __('models.folder')]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'folder_id'])
+                    <x-back.input-error inputName="folder_id"/>
                 </div>
             </div>
         </fieldset>
@@ -101,7 +101,7 @@
                         ];
                     @endphp
                     <div class="images-input" data-json='@json($data)'></div>
-                    @include('back.modules.input-error', ['inputName' => 'pictures[]'])
+                    <x-back.input-error inputName="pictures[]"/>
                 </div>
             </div>
         </fieldset>
@@ -156,7 +156,7 @@
                     <small class="text-body-secondary">
                         {{ __('validation.rule.select-multiple', ['entity' => str(__('models.tag'))->plural()]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'tags'])
+                    <x-back.input-error inputName="tags"/>
                 </div>
             </div>
         </fieldset>
@@ -182,7 +182,7 @@
                             {{ __('validation.boolean', ['attribute' => __('validation.custom.publishment')]) }}
                         </small>
                     </div>
-                    @include('back.modules.input-error', ['inputName' => 'published'])
+                    <x-back.input-error inputName="published"/>
                 </div>
             </div>
         </fieldset>

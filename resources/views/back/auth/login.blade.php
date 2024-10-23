@@ -10,8 +10,8 @@
     </h1>
     <div class="card-auth row justify-content-center mx-auto pb-4 w-100">
         <div class="col-12 p-0">
-            <!-- Show a message when an action is performed -->
-            @include('back.modules.flash-messages')
+            {{-- Show a message when an action is performed --}}
+            <x-back.flash-messages />
         </div>
         <div class="col-12 p-0">
             <form class="bg-body-tertiary card p-sm-4 p-3" method="POST" action="{{ route('bo.login') }}">
@@ -26,7 +26,7 @@
                         </label>
                         <input class="form-control @error('email') is-invalid @enderror" id="email" name="email" type="email"
                             value="{{ old('email') }}" placeholder="{{ __('auth.placeholder_email') }}" autocomplete="email" autofocus>
-                        @include('back.modules.input-error', ['inputName' => 'email'])
+                        <x-back.input-error inputName="email"/>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -36,7 +36,7 @@
                         </label>
                         <input class="form-control @error('password') is-invalid @enderror" id="password" name="password" type="password"
                             placeholder="{{ __('auth.placeholder_password') }}" autocomplete="current-password">
-                        @include('back.modules.input-error', ['inputName' => 'password'])
+                        <x-back.input-error inputName="password"/>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">

@@ -13,22 +13,18 @@
             </a>
         @endcan
     </div>
-    @include('back.modules.search-bar')
+    <x-back.search-bar :search="$search" :searchFields="$searchFields" />
     <div class="bg-body-tertiary border rounded-3 p-3 mb-3">
         <div class="table-responsive">
             <table class="table-hover table-fix-action m-0 table">
                 @if (count($staticPageModels) > 0)
-                    <thead>
-                        @include('back.modules.table-col-sorter', [
-                            'cols' => [
-                                'seo_title' => str(__('validation.custom.seo_title'))->ucfirst(),
-                                'seo_description' => str(__('validation.custom.seo_description'))->ucfirst(),
-                                'title' => str(__('validation.attributes.title'))->ucfirst(),
-                                'updated_at' => str(__('validation.attributes.updated_at'))->ucfirst(),
-                                'order' => str(__('validation.custom.order'))->ucfirst(),
-                            ],
-                        ])
-                    </thead>
+                    <x-back.table-col-sorter :cols="[
+                        'seo_title' => str(__('validation.custom.seo_title'))->ucfirst(),
+                        'seo_description' => str(__('validation.custom.seo_description'))->ucfirst(),
+                        'title' => str(__('validation.attributes.title'))->ucfirst(),
+                        'updated_at' => str(__('validation.attributes.updated_at'))->ucfirst(),
+                        'order' => str(__('validation.custom.order'))->ucfirst(),
+                    ]" />
                     <tbody>
                         @foreach ($staticPageModels as $staticPageModel)
                             <tr @class([
@@ -79,11 +75,7 @@
                                 </td>
                                 @php $routeName = request()->route()->getName(); @endphp
                                 @if (empty(request()->search) && session()->get("$routeName.sort_col") === 'order')
-                                    @include('back.modules.change-model-order', [
-                                        'routeName' => 'static_pages',
-                                        'models' => $staticPageModels,
-                                        'model' => $staticPageModel,
-                                    ])
+                                    <x-back.change-model-order routeName="static_pages" :models="$staticPageModels" :model="$staticPageModel" :loop="$loop" />
                                 @endif
                                 <td @class(['text-end align-middle', 'border-0' => $loop->last])>
                                     @canAny(['update', 'view'], $staticPageModel)
@@ -109,7 +101,7 @@
                                             @endcan
                                         </div>
                                     @else
-                                        @include('back.modules.user-right')
+                                        <x-back.user-right />
                                     @endcan
                                 </td>
                             </tr>

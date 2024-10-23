@@ -35,7 +35,7 @@
                         ];
                     @endphp
                     <div class="form-control w-100 border-0 p-0" id="search-belongs-to-dropdown" data-json='@json($data)'></div>
-                    @include('back.modules.input-error', ['inputName' => 'tags'])
+                    <x-back.input-error inputName="tags"/>
                     <button class="btn btn-primary w-100 w-sm-fit m-0" id="search-ranking-btn" data-bs-tooltip="tooltip" type="submit"
                         title="{{ __('bo_tooltip_ranking_add_game') }}">
                         <i class="fa-solid fa-plus"></i>

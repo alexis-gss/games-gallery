@@ -36,7 +36,7 @@
                             'max' => 255,
                         ]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'name'])
+                    <x-back.input-error inputName="name"/>
                 </div>
                 <div class="col-12 col-md-6 form-group">
                     <label class="col-form-label" for="color">
@@ -59,7 +59,7 @@
                     <small class="text-body-secondary">
                         {{ __('validation.rule.color_label') }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'color'])
+                    <x-back.input-error inputName="color"/>
                 </div>
             </div>
         </fieldset>
@@ -84,7 +84,7 @@
                             {{ __('validation.boolean', ['attribute' => __('validation.custom.publishment')]) }}
                         </small>
                     </div>
-                    @include('back.modules.input-error', ['inputName' => 'published'])
+                    <x-back.input-error inputName="published"/>
                 </div>
                 <div class="col-12 col-md-6 form-check form-switch">
                     <div class="form-check form-switch">
@@ -98,7 +98,7 @@
                             {{ __('validation.boolean', ['attribute' => __('validation.custom.folder_mandatory')]) }}
                         </small>
                     </div>
-                    @include('back.modules.input-error', ['inputName' => 'mandatory'])
+                    <x-back.input-error inputName="mandatory"/>
                 </div>
             </div>
         </fieldset>

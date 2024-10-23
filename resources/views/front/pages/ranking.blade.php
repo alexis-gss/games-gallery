@@ -5,7 +5,7 @@
 @section('breadcrumb', request()->route()->getName())
 
 @section('content')
-    <main class="main-page mx-md-5 px-md-5 m-0 p-0">
+    <section class="main-page mx-md-5 px-md-5 m-0 p-0" data-aos="fade">
         <div class="row w-100 mx-auto">
             <div class="col-12">
                 <div class="my-5">

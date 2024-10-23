@@ -37,7 +37,7 @@
                             'max' => 70,
                         ]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'seo_title'])
+                    <x-back.input-error inputName="seo_title"/>
                 </div>
                 <div class="col-12 col-md-6 form-group mb-3">
                     <label class="col-form-label" for="folder_id">
@@ -69,7 +69,7 @@
                             'max' => 160,
                         ]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'seo_description'])
+                    <x-back.input-error inputName="seo_description"/>
                 </div>
             </div>
             <div class="row">
@@ -103,7 +103,7 @@
                             'max' => 255,
                         ]) }}
                     </small>
-                    @include('back.modules.input-error', ['inputName' => 'title'])
+                    <x-back.input-error inputName="title"/>
                 </div>
             </div>
         </fieldset>
